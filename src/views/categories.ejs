@@ -1,16 +1,38 @@
 <%- include('partials/header') %>
 
-    <main>
-        <h1>
-            <%= title %>
-        </h1>
+<main>
+    <h1><%= title %></h1>
 
-        <ul>
-            <li>Environmental</li>
-            <li>Educational</li>
-            <li>Community Service</li>
-            <li>Health and Wellness</li>
+    <ul>
+        <%
+        let currentCategory = null;
+        %>
+
+        <% categories.forEach(item => { %>
+
+            <% if (currentCategory !== item.category_name) { %>
+
+                <% if (currentCategory !== null) { %>
+                    </ul></li>
+                <% } %>
+
+                <li>
+                    <strong><%= item.category_name %></strong>
+                    <ul>
+
+                <% currentCategory = item.category_name; %>
+            <% } %>
+
+            <li class="project-item">
+                <%= item.title %>
+            </li>
+
+        <% }) %>
+
         </ul>
-    </main>
+    </li>
+</ul>
 
-    <%- include('partials/footer') %>
+</main>
+
+<%- include('partials/footer') %>

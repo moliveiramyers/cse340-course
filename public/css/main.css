@@ -177,7 +177,7 @@ p {
     font-size: clamp(1.05rem, 2vw, 1.22rem);
 }
 
-main > img {
+main>img {
     position: relative;
     z-index: 1;
     display: block;
@@ -286,6 +286,29 @@ main li img {
     border-radius: var(--radius);
 }
 
+/* =========================
+   PROJECT ITEMS (override)
+========================= */
+
+main li ul li {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 6px 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    display: block !important;
+    font-weight: 400;
+    color: var(--color-muted);
+}
+
+/* hover leve */
+main li ul li:hover {
+    background: rgba(31, 111, 91, 0.08) !important;
+    border-radius: 6px;
+    padding-left: 8px !important;
+}
+
 footer {
     width: min(calc(100% - 32px), var(--max-width));
     margin: 0 auto 24px;
@@ -370,6 +393,7 @@ footer p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
