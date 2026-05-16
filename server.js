@@ -2,9 +2,9 @@ import { testConnection } from './src/models/db.js';
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllProjects } from './src/models/projects.js';
-import { getAllCategories } from './src/models/categories.js';
+
+import router from './src/routes.js';
+
 // Define the the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 
@@ -23,7 +23,10 @@ const app = express();
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set EJS as the templating engine
 app.set('view engine', 'ejs');
+
+// Tell Express where to find your templates
 app.set('views', path.join(__dirname, 'src/views'));
 
 // Middleware to log all incoming requests
@@ -40,56 +43,10 @@ app.use((req, res, next) => {
     next();
 });
 
-/**
-  * Routes
-  */
+// Use the imported router to handle routes
+app.use(router);
 
-app.get('/', async (req, res) => {
-    const title = 'Home';
-    res.render('home', { title });
-});
 
-app.get('/organizations', async (req, res) => {
-    try {
-        const organizations = await getAllOrganizations();
-        console.log(organizations);
-        const title = 'Our Partner Organizations';
-        res.render('organizations', { title, organizations });
-    }
-     catch (error) {
-        console.log('Error loading organizations:', error);
-
-        res.render('organizations', { title: 'Our Partner Organizations', organizations: [] });
-    }
-});
-
-app.get('/projects', async (req, res) => {
-    try {
-        const projects = await getAllProjects();
-        const title = 'Service Projects';
-        res.render('projects', { title, projects });
-    } catch (error) {
-        console.log('Error loading organizations:', error)
-        res.render('projects', { title: 'Service Projects', projects: [] });
-    }
-});
-
-app.get('/categories', async (req, res) => {
-    try {
-        const categories = await getAllCategories();
-        const title = 'Categories';
-        res.render('categories', { title, categories });
-    } catch(error) {
-        console.log('Error loading organizations:', error)
-    }
-});
-
-// Test route for 500 errors
-app.get('/test-error', (req, res, next) => {
-    const err = new Error('This is a test error');
-    err.status = 500;
-    next(err);
-});
 
 // Catch-all route for 404 errors
 app.use((req, res, next) => {
