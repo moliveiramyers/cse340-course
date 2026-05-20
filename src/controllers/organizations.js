@@ -1,4 +1,4 @@
-import { getAllOrganizations } from "../models/organizations.js";
+import { getAllOrganizations, getOrganizationById } from "../models/organizations.js";
 
 export const organizationsPage = async (req, res) => {
     
@@ -8,3 +8,14 @@ export const organizationsPage = async (req, res) => {
         res.render('organizations', { title, organizations });
 
 }
+
+export const showOrganizationDetailsPage = async (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const organization = await getOrganizationById(id);
+
+    res.render('organization', {
+        title: organization.name,
+        organization
+    });
+};

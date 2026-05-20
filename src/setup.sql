@@ -43,11 +43,6 @@ VALUES
 );
 
 
-
--- ===================
--- CREATE RELATIONAL SERVICE TABLE 
--- ===================
-
 CREATE TABLE IF NOT EXISTS service_projects (
     project_id SERIAL PRIMARY KEY,
     organization_id INTEGER NOT NULL,
@@ -62,11 +57,6 @@ CREATE TABLE IF NOT EXISTS service_projects (
 );
 
 SELECT * FROM service_projects
-
-
--- ============
--- Insert Service data
--- ============
 
 INSERT INTO service_projects (organization_id, title, description, location, project_date)
 VALUES
@@ -87,3 +77,58 @@ VALUES
 (3, 'Elderly Support Program', 'Helping elderly citizens', 'Porto', '2025-08-08'),
 (3, 'Homeless Shelter Support', 'Volunteering at shelters', 'Coimbra', '2025-09-20'),
 (3, 'Community Volunteer Day', 'City-wide volunteer activities', 'Braga', '2025-10-18');
+
+
+-- =====================
+-- Create Categories table
+-- ======================
+
+CREATE TABLE IF NOT EXISTS categories(
+	category_id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL
+);
+
+
+-- ==========================
+-- Create Relational Category Table
+-- ==========================
+CREATE TABLE IF NOT EXISTS project_categories(
+	category_id INT NOT NULL,
+	project_id INT NOT NULL,
+	PRIMARY KEY (category_id, project_id),
+
+	FOREIGN KEY (category_id)
+		REFERENCES categories(category_id)
+		ON DELETE CASCADE,
+
+	FOREIGN KEY (project_id)
+		REFERENCES service_projects(project_id)
+		ON DELETE CASCADE
+	
+);
+
+INSERT INTO categories (name) VALUES
+('Housing & Construction'),
+('Urban Farming & Sustainability'),
+('Community Support & Volunteering');
+
+INSERT INTO project_categories (category_id, project_id) VALUES
+(1, 1), -- Community Housing Repair
+(1, 2), -- School Renovation Project
+(1, 3), -- Eco Housing Initiative
+(1, 4), -- Bridge Restoration
+(1, 5), -- Urban Infrastructure Upgrade
+
+(2, 6), -- Urban Garden Expansion
+(2, 7), -- School Farming Program
+(2, 8), -- Hydroponics Workshop
+(2, 9), -- Food Sustainability Fair
+(2, 10), -- Rooftop Gardens Project
+
+(3, 11), -- Food Drive Initiative
+(3, 12), -- Beach Cleanup Campaign
+(3, 13), -- Elderly Support Program
+(3, 14), -- Homeless Shelter Support
+(3, 15); -- Community Volunteer Day
+
+SELECT * FROM project_categories;

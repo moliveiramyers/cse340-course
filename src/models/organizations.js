@@ -9,4 +9,15 @@ const getAllOrganizations = async () => {
     return result.rows;
 }
 
-export {getAllOrganizations};
+const getOrganizationById = async (id) => {
+    const query = `
+        SELECT *
+        FROM organization
+        WHERE organization_id = $1;
+    `;
+
+    const result = await db.query(query, [id]);
+    return result.rows[0];
+};
+
+export {getAllOrganizations, getOrganizationById};
