@@ -94,6 +94,44 @@ nav a:focus-visible {
     transform: translateY(-1px);
 }
 
+/* =========================
+   GLOBAL CONTENT LINKS
+========================= */
+
+main a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
+    transition:
+        color 180ms ease,
+        opacity 180ms ease;
+}
+
+/* underline animado */
+main a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: var(--color-secondary);
+    border-radius: 999px;
+    transition: width 180ms ease;
+}
+
+main a:hover,
+main a:focus-visible {
+    color: var(--color-primary-dark);
+    outline: none;
+}
+
+main a:hover::after,
+main a:focus-visible::after {
+    width: 100%;
+}
+
 main {
     position: relative;
     width: min(calc(100% - 32px), var(--max-width));

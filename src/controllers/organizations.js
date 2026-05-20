@@ -1,4 +1,4 @@
-import { getAllOrganizations, getOrganizationById } from "../models/organizations.js";
+import { getAllOrganizations, getOrganizationById, getProjectsByOrganization } from "../models/organizations.js";
 
 export const organizationsPage = async (req, res) => {
     
@@ -13,9 +13,11 @@ export const showOrganizationDetailsPage = async (req, res) => {
     const id = parseInt(req.params.id);
 
     const organization = await getOrganizationById(id);
+    const projects = await getProjectsByOrganization(id)
 
     res.render('organization', {
         title: organization.name,
-        organization
+        organization, projects
     });
 };
+

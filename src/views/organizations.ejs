@@ -7,16 +7,21 @@
 
         <p>Here are a few of our partner organizations:</p>
         <ul>
-           <% organizations.forEach(org => {%>
-            <li class="organization-card">
-                <img src="/images/<%=org.logo_filename%>" alt="<%= org.name %> logo">
-                <div class="info">
-                    <strong><%= org.name %></strong>
-                    <span><%= org.contact_email %></span>
-                </div>
-            </li>
+            <% organizations.forEach(org=> {%>
+                <li class="organization-card">
+                    <img src="/images/<%=org.logo_filename%>" alt="<%= org.name %> logo">
+                    <div class="info">
+                        <strong><a href="/organizations/<%= org.organization_id %>">
+                                <%= org.name %>
+                            </a></strong>
 
-           <% }) %>
+                        <span>
+                            <%= org.contact_email %>
+                        </span>
+                    </div>
+                </li>
+
+                <% }) %>
         </ul>
     </main>
     <%- include('partials/footer') %>
