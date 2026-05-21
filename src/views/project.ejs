@@ -32,7 +32,25 @@
             <a href="/organizations/<%= project.organization_id %>">
                 <%= project.organization_name %>
             </a>
-        </section>
 
+        </section>
+        <section>
+
+            <h2>Categories</h2>
+
+            <div class="category-tags">
+
+                <% categories.forEach(category=> { %>
+
+                    <!-- CHANGED: category tag links to category details page -->
+                    <a class="category-tag" href="/categories/<%= category.category_id %>">
+                        <%= category.name %>
+                    </a>
+
+                    <% }) %>
+
+            </div>
+
+        </section>
     </main>
     <%- include('partials/footer') %>

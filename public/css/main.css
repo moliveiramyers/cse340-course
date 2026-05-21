@@ -108,6 +108,46 @@ main a {
         opacity 180ms ease;
 }
 
+
+/* Reusable category tag styling */
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.category-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary-dark);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        background-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+}
+
+.category-tag:hover,
+.category-tag:focus-visible {
+    background: var(--color-primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+.category-tag::after {
+    display: none;
+}
+.category-tag::after {
+    content: none;
+}
+
 /* underline animado */
 main a::after {
     content: "";
