@@ -1,11 +1,12 @@
-import { getAllOrganizations, getOrganizationById, getProjectsByOrganization } from "../models/organizations.js";
+import { getAllOrganizations, getOrganizationById, getProjectsByOrganization, createOrganization } from "../models/organizations.js";
+import { showNewOrganizationForm } from "./new-organizations.js";
 
 export const organizationsPage = async (req, res) => {
-    
-        const organizations = await getAllOrganizations();
-        console.log(organizations);
-        const title = 'Our Partner Organizations';
-        res.render('organizations', { title, organizations });
+
+    const organizations = await getAllOrganizations();
+    console.log(organizations);
+    const title = 'Our Partner Organizations';
+    res.render('organizations', { title, organizations });
 
 }
 
@@ -21,3 +22,9 @@ export const showOrganizationDetailsPage = async (req, res) => {
     });
 };
 
+export const processNewOrganizationForm = async (req, res) => {
+    const { name, description, contactEmail } = req.body;
+    const logoFileName = 'placeholder-logo.png';
+    const organizationId = await createOrganization(name, description, contactEmail, logoFileName);
+    res.redirect(`/organizations/${organizationId}`);
+}

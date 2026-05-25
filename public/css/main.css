@@ -387,6 +387,100 @@ main li ul li:hover {
     padding-left: 8px !important;
 }
 
+/* =========================
+   FORM STYLES
+========================= */
+
+form {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    color: var(--color-primary-dark);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: #ffffff;
+    color: var(--color-ink);
+    font-size: 1rem;
+    font-family: inherit;
+    transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+/* textarea específico */
+.form-group textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* focus states */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(31, 111, 91, 0.15);
+    transform: translateY(-1px);
+}
+
+/* placeholder */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* botão */
+
+form button {
+    align-self: flex-start;
+    min-height: 48px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--color-primary);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+        background-color 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+    box-shadow: 0 10px 22px rgba(31, 111, 91, 0.18);
+}
+
+form button:hover,
+form button:focus-visible {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(31, 41, 51, 0.18);
+    outline: none;
+}
+
+
 footer {
     width: min(calc(100% - 32px), var(--max-width));
     margin: 0 auto 24px;
@@ -467,6 +561,20 @@ footer p {
     main li img {
         display: block;
         margin: 0 0 14px;
+    }
+
+        form {
+        gap: 18px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 14px;
+    }
+
+    form button {
+        width: 100%;
+        justify-content: center;
     }
 }
 
