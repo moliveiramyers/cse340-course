@@ -1,7 +1,6 @@
 import { body, validationResult } from 'express-validator';
 
-import { getAllOrganizations, getOrganizationById, getProjectsByOrganization, createOrganization } from "../models/organizations.js";
-import { showNewOrganizationForm } from "./new-organizations.js";
+import { getAllOrganizations, getOrganizationById, getProjectsByOrganization, createOrganization, updateOrganization } from "../models/organizations.js";
 
 const registrationValidation = [
     body('name')
@@ -47,6 +46,11 @@ const showOrganizationDetailsPage = async (req, res) => {
         organization, projects
     });
 };
+const showNewOrganizationForm = async (req, res) => {
+    const title = 'Add New Organization';
+
+    res.render('new-organization', { title });
+}
 
 const processNewOrganizationForm = async (req, res) => {
 
@@ -68,9 +72,37 @@ const processNewOrganizationForm = async (req, res) => {
     res.redirect(`/organizations/${organizationId}`);
 }
 
+const showEditOrganizationForm = async (req, res) => {
+    const organizationId = parseInt(req.params.id);
+    const organizationDetails = await getOrganizationById(organizationId);
+    const title = 'Edit Organization';
+    res.render('edit-organization', { title, organizationDetails });
+}
+
+const processEditOrganizationForm = async (req, res) => {
+    const results = validationResult(req);
+    const organizationId = parseInt(req.params.id);
+    if (!results.isEmpty()) {
+        results.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+        return res.redirect(`/edit-organization/${organizationId}`)
+    }
+
+    const { name, description, contactEmail, logoFilename } = req.body;
+    
+    await updateOrganization(organizationId, name, description, contactEmail, logoFilename);
+    req.flash('success', 'Organization updated successfully!')
+    res.redirect(`/organizations/${organizationId}`);
+
+}
+
 export {
     organizationsPage,
     showOrganizationDetailsPage,
+    showNewOrganizationForm,
     processNewOrganizationForm,
+    showEditOrganizationForm,
+    processEditOrganizationForm,
     registrationValidation
 };
