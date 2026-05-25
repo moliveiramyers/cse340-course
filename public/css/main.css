@@ -94,6 +94,67 @@ nav a:focus-visible {
     transform: translateY(-1px);
 }
 
+/* Flash messages container */
+.flash-container {
+    position: relative;
+    z-index: 5;
+    max-width: 700px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Base alert */
+.alert {
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    box-shadow: 0 10px 20px rgba(31, 41, 51, 0.08);
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+/* success */
+.alert.success {
+    background: var(--color-primary-soft);
+    color: var(--color-primary-dark);
+    border-color: rgba(31, 111, 91, 0.3);
+}
+
+/* error */
+.alert.error {
+    background: #ffe4e6;
+    color: #7f1d1d;
+    border-color: #fecaca;
+}
+
+/* warning */
+.alert.warning {
+    background: var(--color-secondary-soft);
+    color: #7c2d12;
+    border-color: #fed7aa;
+}
+
+/* info */
+.alert.info {
+    background: #dbeafe;
+    color: #1e3a8a;
+    border-color: #bfdbfe;
+}
+
+/* animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* =========================
    GLOBAL CONTENT LINKS
 ========================= */
@@ -107,7 +168,6 @@ main a {
         color 180ms ease,
         opacity 180ms ease;
 }
-
 
 /* Reusable category tag styling */
 
