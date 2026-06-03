@@ -6,13 +6,16 @@
         </h1>
 
         <ul>
+            <a class="add-button" href="/new-category" class="add-button">
+                + Add New Category
+            </a>
 
             <% categories.forEach(category=> { %>
 
                 <li>
                     <a href="/categories/<%= category.category_id %>">
 
-                        <%= category.category_name %>
+                        <%= category.name %>
 
                     </a>
 
