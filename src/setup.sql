@@ -132,3 +132,64 @@ INSERT INTO project_categories (category_id, project_id) VALUES
 (3, 15); -- Community Volunteer Day
 
 SELECT * FROM project_categories;
+
+
+INSERT INTO categories (name) VALUES 
+('Sports'),
+('Technology'),
+('Education');
+
+SELECT * FROM categories;
+
+SELECT NOW();
+
+INSERT INTO service_projects (
+    organization_id,
+    title,
+    description,
+    location,
+    project_date
+)
+VALUES
+(
+    1,
+    'Community Food Drive',
+    'Collect and distribute food to families experiencing food insecurity.',
+    'Salt Lake City, UT',
+    '2026-07-15'
+),
+(
+    1,
+    'School Supply Donation Event',
+    'Gather and distribute school supplies to local students.',
+    'Provo, UT',
+    '2026-08-10'
+),
+(
+    2,
+    'Neighborhood Park Cleanup',
+    'Volunteers work together to clean and improve a local park.',
+    'Ogden, UT',
+    '2026-07-22'
+),
+(
+    2,
+    'Senior Center Support Day',
+    'Assist senior citizens with activities and facility maintenance.',
+    'Logan, UT',
+    '2026-09-05'
+),
+(
+    3,
+    'Youth Mentorship Workshop',
+    'Provide educational and leadership mentoring for youth.',
+    'Idaho Falls, ID',
+    '2026-08-20'
+),
+(
+    3,
+    'Holiday Care Package Assembly',
+    'Prepare care packages for families and individuals in need.',
+    'Boise, ID',
+    '2026-12-01'
+);
