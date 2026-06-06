@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS organization (
 	logo_filename  VARCHAR(255) NOT NULL
 );
 
-SELECT * FROM organization
 
 -- ============
 -- Insert data
@@ -56,7 +55,6 @@ CREATE TABLE IF NOT EXISTS service_projects (
         ON DELETE CASCADE
 );
 
-SELECT * FROM service_projects
 
 INSERT INTO service_projects (organization_id, title, description, location, project_date)
 VALUES
@@ -131,15 +129,12 @@ INSERT INTO project_categories (category_id, project_id) VALUES
 (3, 14), -- Homeless Shelter Support
 (3, 15); -- Community Volunteer Day
 
-SELECT * FROM project_categories;
-
 
 INSERT INTO categories (name) VALUES 
 ('Sports'),
 ('Technology'),
 ('Education');
 
-SELECT * FROM categories;
 
 SELECT NOW();
 
@@ -192,4 +187,40 @@ VALUES
     'Prepare care packages for families and individuals in need.',
     'Boise, ID',
     '2026-12-01'
+);
+
+
+-- ========================
+-- Roles
+-- ========================
+
+CREATE TABLE IF NOT EXISTS roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE,
+    role_description TEXT
+);
+
+INSERT INTO roles (role_name, role_description)
+VALUES
+(
+    'user',
+    'Standard user with basic access'
+),
+(
+    'admin',
+    'Administrator with full system access'
+);
+
+--=================
+-- USER
+--=================
+
+CREATE TABLE IF NOT EXISTS users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INTEGER REFERENCES roles(role_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
 );

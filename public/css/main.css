@@ -52,6 +52,75 @@ body::before {
     text-transform: uppercase;
 }
 
+/* USER AUTH BAR */
+.user {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+/* remove bullets */
+.user li {
+    list-style: none;
+    display: inline;
+}
+
+/* links */
+/* USER AREA (clean, no bar effect) */
+.user {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 10px 20px;
+    background: transparent; /* remove a faixa */
+    border: none;            /* remove a linha */
+}
+
+/* lista */
+.user ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+/* items */
+.user li {
+    list-style: none;
+}
+
+.user a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+
+    padding: 8px 14px;
+    border-radius: 8px;
+
+    background-color: var(--color-primary); /* cor de botão */
+    display: inline-block;
+
+    transition: all 0.2s ease;
+}
+
+/* hover */
+.user a:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+/* click effect */
+.user a:active {
+    transform: translateY(0);
+}
+
 nav {
     position: sticky;
     top: 0;

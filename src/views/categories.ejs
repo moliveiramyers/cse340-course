@@ -6,22 +6,26 @@
         </h1>
 
         <ul>
-            <a class="add-button" href="/new-category" class="add-button">
-                + Add New Category
-            </a>
+            <% if (user && user.role_name==='admin' ) { %>
 
-            <% categories.forEach(category=> { %>
+                <a class="add-button" href="/new-category" class="add-button">
+                    + Add New Category
+                </a>
+                <% } %>
 
-                <li>
-                    <a href="/categories/<%= category.category_id %>">
 
-                        <%= category.name %>
+                    <% categories.forEach(category=> { %>
 
-                    </a>
+                        <li>
+                            <a href="/categories/<%= category.category_id %>">
 
-                </li>
+                                <%= category.name %>
 
-                <% }) %>
+                            </a>
+
+                        </li>
+
+                        <% }) %>
 
         </ul>
 

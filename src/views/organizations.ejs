@@ -23,8 +23,10 @@
 
                 <% }) %>
         </ul>
+        <% if (user && user.role_name==='admin' ) { %>
 
-        <p><a class="add-button" href="/new-organization">Add a new organization</a></p>
+            <p><a class="add-button" href="/new-organization">Add a new organization</a></p>
+        <% } %>
 
     </main>
 

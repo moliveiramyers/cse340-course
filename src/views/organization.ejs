@@ -1,24 +1,33 @@
 <%- include('partials/header') %>
 
-<main>
-    <h1><%= organization.name %></h1>
+    <main>
+        <h1>
+            <%= organization.name %>
+        </h1>
 
-    <p><%= organization.description %></p>
+        <p>
+            <%= organization.description %>
+        </p>
 
-    <p><strong>Email:</strong> <%= organization.contact_email %></p>
-    <a href="/edit-organization/<%=organization.organization_id %>">Edit Organization Details</a>
+        <p><strong>Email:</strong>
+            <%= organization.contact_email %>
+        </p>
+        <% if (user && user.role_name==='admin' ) { %>
 
-    <h3>Projects</h3>
+            <a href="/edit-organization/<%=organization.organization_id %>">Edit Organization Details</a>
+            <% } %>
 
-    <ul>
-        <% projects.forEach(project => { %>
-            <li>
-                <a href="/projects/<%= project.project_id %>">
-                    <%= project.title %>
-                </a>
-            </li>
-        <% }) %>
-    </ul>
-</main>
+                <h3>Projects</h3>
 
-<%- include('partials/footer') %>
+                <ul>
+                    <% projects.forEach(project=> { %>
+                        <li>
+                            <a href="/projects/<%= project.project_id %>">
+                                <%= project.title %>
+                            </a>
+                        </li>
+                        <% }) %>
+                </ul>
+    </main>
+
+    <%- include('partials/footer') %>

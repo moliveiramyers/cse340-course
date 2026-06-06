@@ -9,12 +9,17 @@
             <% projects.forEach(project=> { %>
                 <li>
                     <strong>
-                        <%= new Date(project.date).toLocaleDateString() %>: <a href="/projects/<%= project.project_id %>"><%= project.title %></a>
-                            
+                        <%= new Date(project.date).toLocaleDateString() %>: <a
+                                href="/projects/<%= project.project_id %>">
+                                <%= project.title %>
+                            </a>
+
                     </strong>
 
                     <span>
-                        <a href="/organizations/<%= project.organization_id %>"><%= project.organization_name %></a>
+                        <a href="/organizations/<%= project.organization_id %>">
+                            <%= project.organization_name %>
+                        </a>
                     </span>
 
                     <p>
@@ -23,6 +28,10 @@
                 </li>
                 <% }) %>
         </ul>
-        <p><a class="add-button" href="/new-project">Add A Project</a></p>
+        <% if (user && user.role_name==='admin' ) { %>
+
+            <p><a class="add-button" href="/new-project">Add A Project</a></p>
+            <% } %>
+
     </main>
     <%- include('partials/footer') %>

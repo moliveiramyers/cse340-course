@@ -7,26 +7,29 @@
         </h1>
 
         <h2>Projects in this Category</h2>
-        <a class="add-button" href="/edit-category/<%= category.category_id %>">
-            Edit
-        </a>
-        <ul>
+        <% if (user && user.role_name==='admin' ) { %>
 
-            <% projects.forEach(project=> { %>
+            <a class="add-button" href="/edit-category/<%= category.category_id %>">
+                Edit
+            </a>
+            <% } %>
+                <ul>
 
-                <li>
+                    <% projects.forEach(project=> { %>
 
-                    <a href="/projects/<%= project.project_id %>">
+                        <li>
 
-                        <%= project.title %>
+                            <a href="/projects/<%= project.project_id %>">
 
-                    </a>
+                                <%= project.title %>
 
-                </li>
+                            </a>
 
-                <% }) %>
+                        </li>
 
-        </ul>
+                        <% }) %>
+
+                </ul>
 
     </main>
 
