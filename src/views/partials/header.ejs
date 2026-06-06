@@ -28,6 +28,10 @@
             <li><a href="/organizations">Organizations</a></li>
             <li><a href="/projects">Projects</a></li>
             <li><a href="/categories">Categories</a></li>
+            <% if (user && user.role_name==='admin' ) { %>
+            <li><a href="/users">Users</a></li>
+                <% } %>
+
         </ul>
     </nav>
     <% const messages=flash(); %>

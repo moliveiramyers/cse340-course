@@ -733,6 +733,23 @@ form button:focus-visible {
 }
 
 
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid var(--color-border);
+    padding: 10px;
+    text-align: left;
+}
+
+.table th {
+    background: var(--color-primary-soft);
+    color: var(--color-ink);
+}
+
 footer {
     width: min(calc(100% - 32px), var(--max-width));
     margin: 0 auto 24px;

@@ -5,7 +5,7 @@ import { organizationsPage, processNewOrganizationForm, showOrganizationDetailsP
 import { projectsPage, showProjectDetailsPage, processNewProjectForm, showNewProjectForm, projectValidation, showEditProjectForm, processEditProjectForm } from './controllers/projects.js';
 import { categoriesPage, categoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm, categoryValidation, processNewCategory, showEditCategoryForm, showNewCategoryForm, processEditCategory } from './controllers/categories.js';
 
-import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole } from './controllers/users.js';
+import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole, ShowAllUsers } from './controllers/users.js';
 import { testErrorPage } from './controllers/errors.js';
 
 
@@ -55,7 +55,8 @@ router.get(`/logout`, processLogout);
 // Dashboard
 router.get(`/dashboard`, requireLogin, showDashboard);
 
-// Authorization
+// Users
+router.get(`/users`, requireRole('admin'), ShowAllUsers)
 
 
 // Test route for 500 errors
