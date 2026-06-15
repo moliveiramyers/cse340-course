@@ -2,6 +2,7 @@ import { body, Result, validationResult } from 'express-validator';
 import { getAllProjects, getUpcomingProjects, getProjectDetails, createProject, getProjectWithCategories, updateProject } from "../models/projects.js";
 import { getAllOrganizations } from "../models/organizations.js";
 import { getCategoriesByProject } from "../models/categories.js";
+import { checkRegistration } from '../models/volunteering.js';
 // import { render } from 'ejs';
 
 const projectValidation = [
@@ -49,9 +50,16 @@ const showProjectDetailsPage = async (req, res) => {
                 return res.status(400).send("Invalid project ID");
         }
 
+        const userId = req.session.user ? req.session.user.user_id : null;
+
+        let isRegistered = false;
+        if (userId) {
+                isRegistered = await checkRegistration(userId, id);
+        }
+
         const project = await getProjectWithCategories(id);
 
-        res.render('project', { project });
+        res.render('project', { project, isRegistered });
 }
 
 const showNewProjectForm = async (req, res) => {
@@ -96,7 +104,7 @@ const processNewProjectForm = async (req, res) => {
 
 const showEditProjectForm = async (req, res) => {
         const projectId = parseInt(req.params.id);
-        const project = await getProjectWithCategories (projectId);
+        const project = await getProjectWithCategories(projectId);
         const organizations = await getAllOrganizations();
 
         if (!project) {

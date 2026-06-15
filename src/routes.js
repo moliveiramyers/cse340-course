@@ -4,7 +4,7 @@ import { homePage } from './controllers/index.js';
 import { organizationsPage, processNewOrganizationForm, showOrganizationDetailsPage, registrationValidation, showNewOrganizationForm, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
 import { projectsPage, showProjectDetailsPage, processNewProjectForm, showNewProjectForm, projectValidation, showEditProjectForm, processEditProjectForm } from './controllers/projects.js';
 import { categoriesPage, categoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm, categoryValidation, processNewCategory, showEditCategoryForm, showNewCategoryForm, processEditCategory } from './controllers/categories.js';
-
+import { volunteeringRegistration, unvolunteerRegistration } from './controllers/volunteering.js';
 import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole, ShowAllUsers } from './controllers/users.js';
 import { testErrorPage } from './controllers/errors.js';
 
@@ -32,6 +32,9 @@ router.get('/new-project', requireRole('admin'), showNewProjectForm);
 router.post('/new-project', requireRole('admin'), projectValidation, processNewProjectForm);
 router.get('/edit-project/:id', requireRole('admin'), showEditProjectForm);
 router.post('/edit-project/:id', requireRole('admin'), processEditProjectForm);
+
+router.get('/volunteer/:id', requireLogin, volunteeringRegistration);
+router.get('/unvolunteer/:id', requireLogin, unvolunteerRegistration);
 
 // Handle Categories
 router.get('/categories', categoriesPage);

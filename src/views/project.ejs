@@ -1,7 +1,25 @@
 <%- include('partials/header') %>
 
     <main>
+        <div>
+            <% const messages=flash(); %>
 
+                <% if (messages.success.length) { %>
+                    <% messages.success.forEach(msg=> { %>
+                        <div class="flash-success">
+                            <%= msg %>
+                        </div>
+                        <% }) %>
+                            <% } %>
+
+                                <% if (messages.error.length) { %>
+                                    <% messages.error.forEach(msg=> { %>
+                                        <div class="flash-error">
+                                            <%= msg %>
+                                        </div>
+                                        <% }) %>
+                                            <% } %>
+        </div>
         <h1>
             <%= project.title %>
         </h1>
@@ -59,7 +77,19 @@
                     </a>
                 </p>
                 <% } %>
-
+                    <% if (user && user.role_name==='user' ) { %>
+                        <% if (isRegistered) { %>
+                            <a class="add-button" href="/unvolunteer/<%= project.project_id %>">
+                                Unsubscribe
+                            </a>
+                            <% } else { %>
+                                <p>
+                                    <a class="add-button" href="/volunteer/<%= project.project_id %>">
+                                        Volunteer
+                                    </a>
+                                </p>
+                                <% } %>
+                                    <% } %>
         </section>
     </main>
     <%- include('partials/footer') %>
