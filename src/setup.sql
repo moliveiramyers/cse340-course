@@ -225,12 +225,14 @@ CREATE TABLE IF NOT EXISTS users (
 
 );
 
-CREATE TABLE IF NOT EXISTS volunteering (
-	volunteer_id SERIAL PRIMARY KEY,
-	user_id INT,
-	project_id INT,
-	created_at TIMESTAMP DEFAULT NOW(),
-	FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-	FOREIGN KEY (project_id) REFERENCES service_projects(project_id) ON DELETE CASCADE,
-	UNIQUE(user_id,project_id)
+CREATE TABLE volunteering (
+    volunteer_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    project_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES service_projects(project_id) ON DELETE CASCADE,
+
+    UNIQUE (user_id, project_id)
 );

@@ -4,18 +4,20 @@ const addVolunteer = async (userId, projectId) => {
     const query = `
     INSERT INTO volunteering (user_id, project_id)
     VALUES($1, $2)
+    ON CONFLICT (user_id, project_id) DO NOTHING
     RETURNING volunteer_id;
     `;
 
     const result = await db.query(query, [userId, projectId]);
-    return result.rows[0].volunteer_id;
+    return result.rows[0]?.volunteer_id || null;
 };
 
 const deleteVolunteer = async (userId, projectId) => {
     const query = `
+    DELETE FROM volunteering
     WHERE user_id = $1
     AND project_id = $2
-    RETURNING volunteer_id
+    RETURNING volunteer_id;
     `;
 
     const result = await db.query(query, [userId, projectId]);
@@ -27,11 +29,10 @@ const getUserProjects = async (userId) => {
     SELECT
         sp.project_id,
         sp.title,
-        v.date AS enrollment_date
-        sp.title AS title
+        v.created_at AS enrollment_date
     FROM volunteering v
     INNER JOIN service_projects sp ON v.project_id = sp.project_id
-    WHERE user_id = $1;
+    WHERE v.user_id = $1;
     ` ;
     const result = await db.query(query, [userId]);
     return result.rows;

@@ -237,18 +237,21 @@ app.use((err, req, res, next) => {
 /**
  * Start server AFTER DB connection check
  */
-const startServer = async () => {
-    try {
-        await testConnection();
+const server = app.listen(PORT, () => {
+    console.log(`Server running at http://127.0.0.1:${PORT}`);
+    console.log(`Environment: ${NODE_ENV}`);
 
-        app.listen(PORT, () => {
-            console.log(`Server running at http://127.0.0.1:${PORT}`);
-            console.log(`Environment: ${NODE_ENV}`);
-        });
-    } catch (error) {
-        console.error('Error connecting to the database:', error);
+    testConnection().catch((error) => {
+        console.error('Error connecting to the database:', error.message || error);
+    });
+});
+
+server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+        console.error(`Port ${PORT} is already in use. Try changing PORT in .env.`);
         process.exit(1);
     }
-};
 
-startServer();
+    console.error('Server failed to start:', error);
+    process.exit(1);
+});
