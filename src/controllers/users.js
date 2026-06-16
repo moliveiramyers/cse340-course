@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
 
+import { getUserProjects } from '../models/volunteering.js';
 
 const showUserRegistrationForm = async (req, res) => {
 
@@ -68,12 +69,20 @@ const requireLogin = async (req, res, next) => {
 }
 
 const showDashboard = async (req, res) => {
-    const user = req.session.user;
-    res.render('dashboard', {
-        title: 'Dashboard',
-        name: user.name,
-        email: user.email
-    });
+    try {
+        const user = req.session.user;
+        const userId = req.session.user.user_id;
+        const projects = await getUserProjects(userId);
+        return res.render('dashboard', {
+            title: 'Dashboard',
+            name: user.name,
+            email: user.email, projects
+        });
+    } catch (error) {
+        console.log('Error loading dashboad: ', error);
+        req.flash('error', 'could not load dashboad.');
+        return res.redirect('/');
+    }
 }
 
 const requireRole = (role) => {
@@ -92,10 +101,10 @@ const requireRole = (role) => {
 
 const ShowAllUsers = async (req, res) => {
     try {
-        const users= await getAllUsers();
+        const users = await getAllUsers();
         res.render('users', { title: 'Users', users });
     } catch (error) {
-         console.error('Error loading users:', error);
+        console.error('Error loading users:', error);
         req.flash('error', 'Could not load users.');
         res.redirect('/')
     }

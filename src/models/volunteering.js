@@ -32,7 +32,8 @@ const getUserProjects = async (userId) => {
         v.created_at AS enrollment_date
     FROM volunteering v
     INNER JOIN service_projects sp ON v.project_id = sp.project_id
-    WHERE v.user_id = $1;
+    WHERE v.user_id = $1
+    ORDER BY v.created_at DESC;
     ` ;
     const result = await db.query(query, [userId]);
     return result.rows;
@@ -47,4 +48,4 @@ const checkRegistration = async (userId, projectId) => {
     return result.rowCount > 0;
 }
 
-export { addVolunteer, deleteVolunteer, getUserProjects, checkRegistration }
+export { addVolunteer, deleteVolunteer, checkRegistration, getUserProjects }

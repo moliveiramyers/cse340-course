@@ -767,6 +767,68 @@ footer p {
     font-size: 0.96rem;
 }
 
+/* Subscription container */
+.project-title  {
+    color: var(--color-ink);
+    background-color: var(--color-primary-soft);
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    font-size: 1.3rem;
+    margin: 25px 0 20px;
+}
+.project-subscription {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+
+/* Project title and date */
+.project-info a {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+.project-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+
+/* Unsubscribe link */
+.unsubscribe-button {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+
+.unsubscribe-button:hover {
+    background-color: #ffe5e5;
+}
+
+/* Dashboard link section */
+.dashboard {
+    margin: 20px 0;
+}
+.dashboard a{
+        font-size: larger;
+
+}
+
+
+
+
+
 @media (max-width: 720px) {
     body::before {
         margin-top: 16px;
@@ -858,3 +920,4 @@ footer p {
         animation-iteration-count: 1 !important;
     }
 }
+

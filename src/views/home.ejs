@@ -1,6 +1,11 @@
 <%- include('partials/header') %>
 
     <main>
+        <div class="dashboard">
+            <% if (isLoggedIn) { %>
+                <p><a href="/dashboard">My Dashboard</a></p>
+                <% } %>
+        </div>
         <h1>
             <%= title %>
         </h1>
@@ -9,9 +14,7 @@
         <p>Our mission is to promote service across the world...</p>
 
         <img src="/images/cse340-service-network.png" alt="logo">
-        <% if (isLoggedIn) { %>
-            <p><a href="/dashboard">My Dashboard</a></p>
-            <% } %>
+
     </main>
 
     <%- include('partials/footer') %>

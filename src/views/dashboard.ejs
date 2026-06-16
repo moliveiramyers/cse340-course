@@ -14,6 +14,37 @@
         <% if (user && user.role_name==='admin' ) { %>
             <a href="/users">Users</a>
             <% } %>
+                <div>
+                    <% if (user && (user.role_name==='user' || user.role_name=='admin' )) {%>
+                        <h3 class="project-title">Your Projects Subscriptions</h3>
+                        <% if (!projects || projects.length===0) { %>
+                            <p>No projects found.</p>
+                            <% } else { %>
+                                <% projects.forEach(project=> { %>
+                                    <div class="project-subscription">
+
+                                        <div class="project-info">
+                                            <a href="/projects/<%= project.project_id %>">
+                                                <%= project.title %>
+                                            </a>
+
+                                            <p>
+                                                Subscribed on:
+                                                <%= new Date(project.enrollment_date).toLocaleDateString() %>
+                                            </p>
+                                        </div>
+
+
+                                        <a class="unsubscribe-button" href="/unvolunteer/<%= project.project_id %>">
+                                            ✕ Unsubscribe
+                                        </a>
+
+                                    </div>
+
+                                    <% }) %>
+                                        <% } %>
+                                            <%}%>
+                </div>
     </main>
 
     <%- include('partials/footer') %>

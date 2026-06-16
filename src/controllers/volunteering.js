@@ -1,4 +1,5 @@
 import { addVolunteer, deleteVolunteer, checkRegistration } from "../models/volunteering.js";
+import { requireLogin } from "./users.js";
 
 const volunteeringRegistration = async (req, res) => {
     const userId = Number(req.session.user?.user_id);
@@ -45,5 +46,17 @@ const unvolunteerRegistration = async (req, res) => {
         return res.redirect(`/projects/${projectId}`);
     }
 };
+
+// const getUserProjects = async (req, res) => {
+//     try {
+//         if (!req.session && !req.session.user) {
+//             console.log("You are not signed in. Please sign in to see this page!");
+//         }
+//         const userId = req.session.user.user_id;
+//         await filterUserProjects(userId);
+//     } catch(error) {
+//         console.log('No projects loaded:', error);
+//     };
+// }
 
 export { volunteeringRegistration, unvolunteerRegistration };
