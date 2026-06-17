@@ -77,7 +77,7 @@
                     </a>
                 </p>
                 <% } %>
-                    <% if (user && user.role_name==='user' ) { %>
+                    <% if (user && (user.role_name==='user' || user.role_name=='admin' ) ) { %>
                         <% if (isRegistered) { %>
                             <a class="add-button" href="/unvolunteer/<%= project.project_id %>">
                                 Unsubscribe
